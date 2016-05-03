@@ -24,8 +24,6 @@ class Network(object):
 				self.update_mini_batch(mini_batch,eta)
 			if test_data:
 				print "(Epoch {0}) MSE : {1}".format(j, self.evaluate(test_data))
-			else:
-				print "(Epoch) {0} complete".format(j)
 
 	def update_mini_batch(self, mini_batch, eta):
 		nabla_b = [np.zeros(b.shape) for b in self.biases]
@@ -62,7 +60,6 @@ class Network(object):
 	
 	def evaluate(self, test_data):
 		test_results = [(self.feedforward(x) - y)**2 for (x,y) in test_data]
-		print(len(test_results))
 		return np.mean(test_results)
 
 	def cost_derivative(self, output_activations, y):
@@ -72,13 +69,20 @@ def sigmoid(z):
 	return 1.0/(1.0+np.exp(-z))
 
 def sigmoid_prime(z):
-	return sigmoid(z)*(1-sigmoid(z))
+	y = sigmoid(z)*(1-sigmoid(z))
+	return y
 
 def relu(z):
-	return max(0.0,z)
+	for i in range(len(z[0])):
+		if z[i][0] < 0:
+			z[i][0] = 0
+	print(z[i])
+	return z
 
 def relu_prime(z):
-	if z <= 0:
-		return 0
-	else:
-		return 1
+	for i in range(len(z[0])):
+		if z[i][0] < 0:
+			z[i][0] = 0
+		else:
+			z[i][0] = 1
+	return 1
