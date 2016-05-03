@@ -23,9 +23,9 @@ class Network(object):
 			for mini_batch in mini_batches:
 				self.update_mini_batch(mini_batch,eta)
 			if test_data:
-				print "Epoch {0}: {1} / {2}".format(j, self.evaluate(test_data), n_test)
+				print "(Epoch {0}) MSE : {1}".format(j, self.evaluate(test_data))
 			else:
-				print "Epocj {0} complete".format(j)
+				print "(Epoch) {0} complete".format(j)
 
 	def update_mini_batch(self, mini_batch, eta):
 		nabla_b = [np.zeros(b.shape) for b in self.biases]
@@ -61,8 +61,9 @@ class Network(object):
 		return (nabla_b, nabla_w)
 	
 	def evaluate(self, test_data):
-		test_results = [(np.argmax(self.feedforward(x)), y) for (x,y) in test_data]
-		return sum(int(x==y) for (x,y) in test_results)
+		test_results = [(self.feedforward(x) - y)**2 for (x,y) in test_data]
+		print(len(test_results))
+		return np.mean(test_results)
 
 	def cost_derivative(self, output_activations, y):
 		return (output_activations-y)
@@ -72,3 +73,12 @@ def sigmoid(z):
 
 def sigmoid_prime(z):
 	return sigmoid(z)*(1-sigmoid(z))
+
+def relu(z):
+	return max(0.0,z)
+
+def relu_prime(z):
+	if z <= 0:
+		return 0
+	else:
+		return 1
