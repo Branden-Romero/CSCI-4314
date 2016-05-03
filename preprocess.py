@@ -51,7 +51,7 @@ def parse_crispr_data(data):
 	return np.array(newData)
 
 def pickle_data(data,fileName):
-	with open(fileName[:-4]+'.pkl', 'wb') as f:
+	with open(fileName+'.pkl', 'wb') as f:
 		pickle.dump(data,f)
 
 def main():
