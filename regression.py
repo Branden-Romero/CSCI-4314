@@ -15,7 +15,7 @@ preprocess.pickle_data(linear,"linear")
 
 #L2 Regression
 L2 = linear_model.Ridge(
-	alpha=1e-3,
+	alpha=0.1,
 	fit_intercept=True, 
 	normalize=True, 
 	copy_X=True, max_iter=None, tol=0.001, solver='auto')
@@ -24,7 +24,7 @@ preprocess.pickle_data(L2,"L2_linear")
 
 #L1 Regression
 L1 = linear_model.SGDRegressor('huber', epsilon=0.7, 
-	alpha=1e-3,
+	alpha=0.1,
 	l1_ratio=1.0, 
 	fit_intercept=True, 
 	n_iter=10,penalty='elasticnet', shuffle=True)
