@@ -11,7 +11,7 @@ sets = benchmark_data.Data(data,.4)
 #Linear Regression
 linear = linear_model.LinearRegression()
 linear.fit(sets.X_train,sets.y_train)
-preprocess.pickle_data(linear,"linear")
+#preprocess.pickle_data(linear,"linear")
 
 #L2 Regression
 L2 = linear_model.Ridge(
@@ -20,7 +20,7 @@ L2 = linear_model.Ridge(
 	normalize=True, 
 	copy_X=True, max_iter=None, tol=0.001, solver='auto')
 L2.fit(sets.X_train,sets.y_train)
-preprocess.pickle_data(L2,"L2_linear")
+#preprocess.pickle_data(L2,"L2_linear")
 
 #L1 Regression
 L1 = linear_model.SGDRegressor('huber', epsilon=0.7, 
@@ -29,4 +29,9 @@ L1 = linear_model.SGDRegressor('huber', epsilon=0.7,
 	fit_intercept=True, 
 	n_iter=10,penalty='elasticnet', shuffle=True)
 L1.fit(sets.X_train,sets.y_train)
-preprocess.pickle_data(L1,"L1_linear")
+#preprocess.pickle_data(L1,"L1_linear")
+
+#L1 logistic
+Log =linear_model.LogisticRegression(penalty="l1", dual=False, fit_intercept=True, class_weight=None, tol=0.00001, C=10)
+Log.fit(sets.X_train,sets.y_train)
+#preprocess.pickle_data(Log,"L1_logistic")
