@@ -5,7 +5,7 @@ class Data:
 	def __init__(self,data,splitpercent):
 		self.X = self.get_x(data)
 		self.y = self.get_y(data)
-		self.train, self.test = self.splitdata(splitpercent,data)
+		self.train, self.test, self.X_train, self.y_train, self.X_test,self.y_test = self.splitdata(splitpercent,data)
 
 	def get_x(self,data):
 		return data[:,:-1]
@@ -24,4 +24,4 @@ class Data:
 		ytrain = self.y[trainInd]
 		train = [(Xtrain[i].reshape(-1,1),np.array(ytrain[i]).reshape(-1,1)) for i in range(numObjects-numTestObjects)]
 		test = [(Xtest[i].reshape(-1,1),np.array(ytest[i]).reshape(-1,1)) for i in range(numTestObjects)]
-		return (train,test)
+		return (train,test,Xtrain,ytrain,Xtest,ytest)
