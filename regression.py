@@ -27,7 +27,6 @@ L1 = linear_model.SGDRegressor('huber', epsilon=0.7,
 	alpha=1e-3,
 	l1_ratio=1.0, 
 	fit_intercept=True, 
-	n_iter=10,penalty='elasticnet', shuffle=True, 
-	normalize=True)
+	n_iter=10,penalty='elasticnet', shuffle=True)
 L1.fit(sets.X_train,sets.y_train)
 preprocess.pickle_data(L1,"L1_linear")
