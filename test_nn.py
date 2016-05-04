@@ -1,4 +1,5 @@
 import network
+from sklearn.metrics import mean_squared_error
 from sklearn import svm
 import sklearn.ensemble as en
 from sklearn import linear_model
@@ -50,18 +51,25 @@ def main():
 
 	print("DNN: ")
 	print(metrics.spearman_scoring_nn(neuralNet,sets.train))
+	print(neuralNet.evaluate(sets.test))
 	print("Linear: ")
 	print(metrics.spearman_scoring(linear,sets.X_test,sets.y_test))
-	print("L2: ")
+	print(mean_squared_error(sets.y_test, linear.predict(sets.X_test)))
+	print("L1:  ")
 	print(metrics.spearman_scoring(L1,sets.X_test,sets.y_test))
-	print("L1: ")
+	print(mean_squared_error(sets.y_test, L1.predict(sets.X_test)))
+	print("L2: ")
 	print(metrics.spearman_scoring(L2,sets.X_test,sets.y_test))
+	print(mean_squared_error(sets.y_test, L2.predict(sets.X_test)))
 	print("RF: ")
 	print(metrics.spearman_scoring(RF,sets.X_test,sets.y_test))
+	print(mean_squared_error(sets.y_test, RF.predict(sets.X_test)))
 	print("GB: ")
 	print(metrics.spearman_scoring(GB,sets.X_test,sets.y_test))
+	print(mean_squared_error(sets.y_test, GB.predict(sets.X_test)))
 	print("SVR: ")
 	print(metrics.spearman_scoring(svr,sets.X_test,sets.y_test))
+	print(mean_squared_error(sets.y_test, svr.predict(sets.X_test)))
 		
 if __name__ == "__main__":
 	main()
